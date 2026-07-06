@@ -43,20 +43,33 @@ function testTheArgument(fibNumsTest) {
 
 let resultArray = [];
 const mergeSort = function(arrayList) {
-  console.log(resultArray);
-  const resultArrayCopy = resultArray.slice();
-  resultArray = [];
-
   if (arrayList.length === 0) return [];
+  if (arrayList.length === 1) return arrayList;
+  if (arrayList.length > 1) {
+    let middleOfArray = Math.floor(arrayList.length / 2);
+    const leftHalf = arrayList.slice(0,middleOfArray);
+    const rightHalf = arrayList.slice(middleOfArray, arrayList.length);
+    const firstNum = mergeSort(leftHalf);
+    const secondNum = mergeSort(rightHalf);  
+    console.log(firstNum, secondNum);
+    if (leftHalf === undefined && rightHalf === undefined); 
+    let currentArrayToBeSorted = [];
+    if (firstNum < secondNum) {
+        currentArrayToBeSorted = [firstNum, secondNum];
+      } else {
+        currentArrayToBeSorted = [secondNum, firstNum];
+      };
+    console.log(currentArrayToBeSorted);
+  };
+};
+mergeSort([10,5,6,3,200]); 
 
-  if (arrayList.length === 1) {
-    if (resultArrayCopy[0] === undefined) {
+/* if (resultArray[0] === undefined) {
       resultArray[0] = arrayList[0];
       console.log(resultArray);
     };
-
-    if (resultArrayCopy[0] && resultArrayCopy[1] === undefined) {
-      const firstNum = resultArrayCopy[0];
+    if (resultArray[0] && resultArray[1] === undefined) {
+      const firstNum = resultArray[0];
       const secondNum = arrayList[0];
       if (firstNum < secondNum) {
         resultArray = [firstNum, secondNum];
@@ -66,40 +79,26 @@ const mergeSort = function(arrayList) {
       console.log(resultArray)
     };
 
-    if (resultArrayCopy) {
-      for (let i = 0; i < resultArrayCopy.length; i++) {
-        if (resultArrayCopy[i] > arrayList[0]) {
-          resultArray[i] = arrayList[0];
-          const restOfresultArrayCopy = resultArrayCopy.slice([i]);
-          for (let i = 0; i < restOfresultArrayCopy.length; i++) {
-            resultArray.push(restOfresultArrayCopy[i]);
-          };
+    if (resultArray[1]) {
+      for (let i = 0; i < resultArray.length; i++) {
+        if (resultArray[i] > arrayList[0]) {
+          resultArray.splice(i, 0, arrayList[0]);
+          //resultArray[i] = arrayList[0];
+          //const restOfresultArrayCopy = resultArrayCopy.slice([i]);
+          //for (let i = 0; i < restOfresultArrayCopy.length; i++) {
+          //  resultArray.push(restOfresultArrayCopy[i]);
+          //};
           break;
         };
-        if (resultArrayCopy[i] < arrayList[0]) {
-          if (resultArray[0] === undefined) {
-            resultArray[0] = resultArrayCopy[i];
-          } else {
-            resultArray[resultArray.length] = resultArrayCopy[i];
-          };
+        if (resultArray[i] < arrayList[0]) {
+          resultArray[resultArray.length] = resultArrayCopy[i];
         };
       };
     };
     console.log(resultArray);
     return arrayList;
-  };
-/*  
-  if (arrayList.length === 2) {
-    const firstNum = arrayList[0];
-    const secondNum = arrayList[1];
-    if (firstNum < secondNum) {
-      resultArray = [firstNum, secondNum];
-    } else {
-      resultArray = [secondNum, firstNum];
-    };
-    console.log(resultArray)
-    return resultArray;
-  };
+*/
+
 /*
   if (arrayList.length === 3) {
     console.log(arrayList);
@@ -172,12 +171,3 @@ const mergeSort = function(arrayList) {
     return arrayList
   };
 */
-  if (arrayList.length > 1) {
-    let middleOfArray = Math.floor(arrayList.length / 2);
-    const firstNum = arrayList.slice(0,middleOfArray);
-    const secondNum = arrayList.slice(middleOfArray, arrayList.length);
-    mergeSort(arrayList.slice(0,middleOfArray));
-    mergeSort(arrayList.slice(middleOfArray, arrayList.length));
-  };
-};
-mergeSort([10,5,2,3,1,4]);
