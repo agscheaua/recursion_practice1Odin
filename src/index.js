@@ -42,27 +42,74 @@ function testTheArgument(fibNumsTest) {
 */
 
 let resultArray = [];
+const leftHalfSorted = [];
+const rightHalfSorted = [];
+
 const mergeSort = function(arrayList) {
   if (arrayList.length === 0) return [];
   if (arrayList.length === 1) return arrayList;
   if (arrayList.length > 1) {
     let middleOfArray = Math.floor(arrayList.length / 2);
+
     const leftHalf = arrayList.slice(0,middleOfArray);
     const rightHalf = arrayList.slice(middleOfArray, arrayList.length);
+    console.log(leftHalf, rightHalf);
+
     const firstNum = mergeSort(leftHalf);
     const secondNum = mergeSort(rightHalf);  
-    console.log(firstNum, secondNum);
-    if (leftHalf === undefined && rightHalf === undefined); 
-    let currentArrayToBeSorted = [];
-    if (firstNum < secondNum) {
-        currentArrayToBeSorted = [firstNum, secondNum];
+
+    if (leftHalfSorted[0] === undefined) {
+      if (firstNum[0] < secondNum[0]) {
+        leftHalfSorted.push(firstNum[0]);
+        leftHalfSorted.push(secondNum[0]);
       } else {
-        currentArrayToBeSorted = [secondNum, firstNum];
+        leftHalfSorted.push(secondNum[0]);
+        leftHalfSorted.push(firstNum[0]);
       };
-    console.log(currentArrayToBeSorted);
+      console.log(leftHalfSorted);
+      return leftHalfSorted;
+    };
+    if (leftHalfSorted[0] && rightHalfSorted[0] === undefined) {
+      if (firstNum[0] < secondNum[0]) {
+        rightHalfSorted.push(firstNum[0]);
+        rightHalfSorted.push(secondNum[0]);
+      } else {
+        rightHalfSorted.push(secondNum[0]);
+        rightHalfSorted.push(firstNum[0]);
+      };
+      console.log(rightHalfSorted);
+      return rightHalfSorted;
+    };
+    if (firstNum.length !== 1 && secondNum.length !== 1) {
+      let i = 0;
+      let j = 0;
+      let totalLoops = leftHalfSorted.length + rightHalf.length;
+      resultArray.push(rightHalfSorted[j]);
+      console.log(totalLoops, resultArray.length);
+        if (leftHalfSorted[0] !== undefined && rightHalfSorted[0] !== undefined) {
+          if (leftHalfSorted[i] > rightHalfSorted[j]) {
+            resultArray.push(rightHalfSorted[j]);
+            j++;
+          } else if (leftHalfSorted[i] < rightHalfSorted[j]) {
+            resultArray.push(leftHalfSorted[i]);
+            i++;
+          };
+        };
+        if (leftHalfSorted[0] === undefined) {
+          rightHalfSorted.forEach( (elem) => {
+            resultArray.push(elem);
+          });
+        } else if (rightHalfSorted[0] === undefined) {
+          leftHalfSorted.forEach( (elem) => {
+            resultArray.push(elem);
+          });
+        };
+      console.log(resultArray);
+      return resultArray;
+    }
   };
 };
-mergeSort([10,5,6,3,200]); 
+mergeSort([10,5,11,7]); 
 
 /* if (resultArray[0] === undefined) {
       resultArray[0] = arrayList[0];
