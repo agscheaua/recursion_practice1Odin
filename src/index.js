@@ -80,36 +80,50 @@ const mergeSort = function(arrayList) {
       console.log(rightHalfSorted);
       return rightHalfSorted;
     };
+
     if (firstNum.length !== 1 && secondNum.length !== 1) {
       let i = 0;
       let j = 0;
-      let totalLoops = leftHalfSorted.length + rightHalf.length;
-      resultArray.push(rightHalfSorted[j]);
-      console.log(totalLoops, resultArray.length);
-        if (leftHalfSorted[0] !== undefined && rightHalfSorted[0] !== undefined) {
-          if (leftHalfSorted[i] > rightHalfSorted[j]) {
-            resultArray.push(rightHalfSorted[j]);
-            j++;
-          } else if (leftHalfSorted[i] < rightHalfSorted[j]) {
-            resultArray.push(leftHalfSorted[i]);
-            i++;
+      let nrOfIterations = 0;
+      let loopStoper = leftHalfSorted.length + rightHalfSorted.length + 10;
+      for (;i < leftHalfSorted.length, j < rightHalfSorted.length;) {
+        if (leftHalfSorted[i] > rightHalfSorted[j]) {
+          resultArray.push(rightHalfSorted[j]);
+          j++;
+        } else if (leftHalfSorted[i] < rightHalfSorted[j]) {
+          resultArray.push(leftHalfSorted[i]);
+          i++;
+        } else if (leftHalfSorted[i] === rightHalfSorted[j]) {
+          resultArray.push(leftHalfSorted[i]);
+          resultArray.push(rightHalfSorted[j]);
+          i++;
+          j++;
+        };
+        
+        if (i === leftHalfSorted.length) {
+          for (let k = j; k < rightHalfSorted.length; k++) {
+            resultArray.push(rightHalfSorted[k]);
           };
+          console.log(resultArray);
+          break;
         };
-        if (leftHalfSorted[0] === undefined) {
-          rightHalfSorted.forEach( (elem) => {
-            resultArray.push(elem);
-          });
-        } else if (rightHalfSorted[0] === undefined) {
-          leftHalfSorted.forEach( (elem) => {
-            resultArray.push(elem);
-          });
+        if (j === rightHalfSorted.length) {
+          for (let k = i; k < leftHalfSorted.length; k++) {
+            resultArray.push(leftHalfSorted[k]);
+          };
+          console.log(resultArray);
+          break;
         };
-      console.log(resultArray);
-      return resultArray;
-    }
+
+        nrOfIterations++
+        if (nrOfIterations > loopStoper) {
+          break;
+        }
+      };
+    };
   };
 };
-mergeSort([10,5,11,7]); 
+mergeSort([10,5,2,3]); 
 
 /* if (resultArray[0] === undefined) {
       resultArray[0] = arrayList[0];
