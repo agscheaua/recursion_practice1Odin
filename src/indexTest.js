@@ -42,6 +42,8 @@ function testTheArgument(fibNumsTest) {
 */
 
 let resultArray = [];
+const leftHalfSorted = [];
+const rightHalfSorted = [];
 
 const mergeSort = function(arrayList) {
   if (arrayList.length === 0) return [];
@@ -55,69 +57,73 @@ const mergeSort = function(arrayList) {
 
     const firstNum = mergeSort(leftHalf);
     const secondNum = mergeSort(rightHalf);  
-    console.log(firstNum, secondNum);
 
-    if (resultArray[0] === undefined) {
+    if (leftHalfSorted[0] === undefined) {
       if (firstNum[0] < secondNum[0]) {
-        resultArray.push(firstNum[0]);
-        resultArray.push(secondNum[0]);
+        leftHalfSorted.push(firstNum[0]);
+        leftHalfSorted.push(secondNum[0]);
       } else {
-        resultArray.push(secondNum[0]);
-        resultArray.push(firstNum[0]);
+        leftHalfSorted.push(secondNum[0]);
+        leftHalfSorted.push(firstNum[0]);
       };
-      console.log(resultArray);
-      return resultArray;
+      console.log(leftHalfSorted);
+      return leftHalfSorted;
     };
-  
-    let sortingArray = [];
+    if (leftHalfSorted[0] && rightHalfSorted[0] === undefined) {
+      if (firstNum[0] < secondNum[0]) {
+        rightHalfSorted.push(firstNum[0]);
+        rightHalfSorted.push(secondNum[0]);
+      } else {
+        rightHalfSorted.push(secondNum[0]);
+        rightHalfSorted.push(firstNum[0]);
+      };
+      console.log(rightHalfSorted);
+      return rightHalfSorted;
+    };
 
-    if (resultArray[0]) {
+    if (firstNum.length !== 1 && secondNum.length !== 1) {
       let i = 0;
       let j = 0;
       let nrOfIterations = 0;
-      let loopStoper = firstNum.length + secondNum.length + 10;
-
-      for (;i < firstNum.length, j < secondNum.length;) {
-        if (firstNum[i] > secondNum[j]) {
-          sortingArray.push(secondNum[j]);
+      let loopStoper = leftHalfSorted.length + rightHalfSorted.length + 10;
+      for (;i < leftHalfSorted.length, j < rightHalfSorted.length;) {
+        if (leftHalfSorted[i] > rightHalfSorted[j]) {
+          resultArray.push(rightHalfSorted[j]);
           j++;
-        } else if (firstNum[i] < secondNum[j]) {
-          sortingArray.push(firstNum[i]);
+        } else if (leftHalfSorted[i] < rightHalfSorted[j]) {
+          resultArray.push(leftHalfSorted[i]);
           i++;
-        } else if (firstNum[i] === secondNum[j]) {
-          sortingArray.push(firstNum[i]);
-          sortingArray.push(secondNum[j]);
+        } else if (leftHalfSorted[i] === rightHalfSorted[j]) {
+          resultArray.push(leftHalfSorted[i]);
+          resultArray.push(rightHalfSorted[j]);
           i++;
           j++;
         };
         
-        if (i === firstNum.length) {
-          for (let k = j; k < secondNum.length; k++) {
-            sortingArray.push(secondNum[k]);
+        if (i === leftHalfSorted.length) {
+          for (let k = j; k < rightHalfSorted.length; k++) {
+            resultArray.push(rightHalfSorted[k]);
           };
-          resultArray = sortingArray;
           console.log(resultArray);
-          return resultArray;
+          break;
         };
-        if (j === secondNum.length) {
-          for (let k = i; k < firstNum.length; k++) {
-            sortingArray.push(firstNum[k]);
+        if (j === rightHalfSorted.length) {
+          for (let k = i; k < leftHalfSorted.length; k++) {
+            resultArray.push(leftHalfSorted[k]);
           };
-          resultArray = sortingArray;
           console.log(resultArray);
-          return resultArray;
+          break;
         };
 
         nrOfIterations++
         if (nrOfIterations > loopStoper) {
           break;
         }
-        console.log(sortingArray);
       };
     };
   };
 };
-mergeSort([10,5,2,6,200,11,2123,1,1,200,1,2,3,11,22,42,1]); 
+mergeSort([10,5,2]); 
 
 /* if (resultArray[0] === undefined) {
       resultArray[0] = arrayList[0];
