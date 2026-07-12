@@ -1,6 +1,6 @@
 export {mergeSort};
 
-/*
+// fibonacci recursive soltion;
 const fibs = function(fibNums) {
   testTheArgument(fibNums);
   const fibonacciNumbers = [0, 1, 1];
@@ -13,8 +13,8 @@ const fibs = function(fibNums) {
   console.log(fibonacciNumbers);
   return fibonacciNumbers;
 };
-fibs(20);
 
+// fibonacci iterative solution;
 let fibonacciNumbersRec = [0, 1, 1];
 const fibsRec = function(fibNums) {
   testTheArgument(fibNums);
@@ -30,8 +30,8 @@ const fibsRec = function(fibNums) {
   };
   fibsRec(fibNums);
 };
-fibsRec(8);
 
+// fibonacci helper function to test the argument to see if its all right;
 function testTheArgument(fibNumsTest) {
   if (!(Number.isInteger(fibNumsTest))) throw new Error("The argument in not an integer number.");
   if (fibNumsTest < 0) throw new Error("The argument is smaller than 0.");
@@ -39,11 +39,11 @@ function testTheArgument(fibNumsTest) {
   if (fibNumsTest === 1) return console.log([0,1]);
   if (fibNumsTest === 2 || fibNumsTest === 3) return console.log([0,1,1]);
 };
-*/
 
+// merge_sort recursive soltion;
 let resultArray = [];
-
 const mergeSort = function(arrayList) {
+  if (!(Array.isArray(arrayList))) throw new Error("The argument is not an array.");
   if (arrayList.length === 0) return [];
   if (arrayList.length === 1) return arrayList;
   if (arrayList.length > 1) {
@@ -51,7 +51,6 @@ const mergeSort = function(arrayList) {
 
     const leftHalf = arrayList.slice(0,middleOfArray);
     const rightHalf = arrayList.slice(middleOfArray, arrayList.length);
-    console.log(leftHalf, rightHalf);
 
     const firstNum = mergeSort(leftHalf);
     const secondNum = mergeSort(rightHalf);  
@@ -65,7 +64,6 @@ const mergeSort = function(arrayList) {
         resultArray.push(secondNum[0]);
         resultArray.push(firstNum[0]);
       };
-      console.log(resultArray);
       return resultArray;
     };
   
@@ -74,9 +72,6 @@ const mergeSort = function(arrayList) {
     if (resultArray[0] !== undefined) {
       let i = 0;
       let j = 0;
-      let nrOfIterations = 0;
-      let loopStoper = firstNum.length + secondNum.length + 10;
-
       for (;i < firstNum.length, j < secondNum.length;) {
         if (firstNum[i] > secondNum[j]) {
           sortingArray.push(secondNum[j]);
@@ -96,7 +91,7 @@ const mergeSort = function(arrayList) {
             sortingArray.push(secondNum[k]);
           };
           resultArray = sortingArray;
-          console.log(resultArray);
+          //console.log(resultArray);
           return resultArray;
         };
         if (j === secondNum.length) {
@@ -104,19 +99,12 @@ const mergeSort = function(arrayList) {
             sortingArray.push(firstNum[k]);
           };
           resultArray = sortingArray;
-          console.log(resultArray);
+          //console.log(resultArray);
           return resultArray;
         };
-        
-        nrOfIterations++
-        if (nrOfIterations > loopStoper) {
-          break;
-        };
-        console.log(sortingArray);
       };
     };
   };
 };
-mergeSort([9,8,7,6,5,4,3,2,0]); 
+console.log(mergeSort([9,8,7,6,5,4,3,2,1,0])); 
 
-console.log(mergeSort([]));
