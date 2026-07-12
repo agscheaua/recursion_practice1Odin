@@ -42,8 +42,6 @@ function testTheArgument(fibNumsTest) {
 */
 
 let resultArray = [];
-const leftHalfSorted = [];
-const rightHalfSorted = [];
 
 const mergeSort = function(arrayList) {
   if (arrayList.length === 0) return [];
@@ -57,178 +55,68 @@ const mergeSort = function(arrayList) {
 
     const firstNum = mergeSort(leftHalf);
     const secondNum = mergeSort(rightHalf);  
+    console.log(firstNum, secondNum);
 
-    if (leftHalfSorted[0] === undefined) {
+    if (resultArray[0] === undefined) {
       if (firstNum[0] < secondNum[0]) {
-        leftHalfSorted.push(firstNum[0]);
-        leftHalfSorted.push(secondNum[0]);
+        resultArray.push(firstNum[0]);
+        resultArray.push(secondNum[0]);
       } else {
-        leftHalfSorted.push(secondNum[0]);
-        leftHalfSorted.push(firstNum[0]);
+        resultArray.push(secondNum[0]);
+        resultArray.push(firstNum[0]);
       };
-      console.log(leftHalfSorted);
-      return leftHalfSorted;
+      console.log(resultArray);
+      return resultArray;
     };
-    if (leftHalfSorted[0] && rightHalfSorted[0] === undefined) {
-      if (firstNum[0] < secondNum[0]) {
-        rightHalfSorted.push(firstNum[0]);
-        rightHalfSorted.push(secondNum[0]);
-      } else {
-        rightHalfSorted.push(secondNum[0]);
-        rightHalfSorted.push(firstNum[0]);
-      };
-      console.log(rightHalfSorted);
-      return rightHalfSorted;
-    };
+  
+    let sortingArray = [];
 
-    if (firstNum.length !== 1 && secondNum.length !== 1) {
+    if (resultArray[0] !== undefined) {
       let i = 0;
       let j = 0;
       let nrOfIterations = 0;
-      let loopStoper = leftHalfSorted.length + rightHalfSorted.length + 10;
-      for (;i < leftHalfSorted.length, j < rightHalfSorted.length;) {
-        if (leftHalfSorted[i] > rightHalfSorted[j]) {
-          resultArray.push(rightHalfSorted[j]);
+      let loopStoper = firstNum.length + secondNum.length + 10;
+
+      for (;i < firstNum.length, j < secondNum.length;) {
+        if (firstNum[i] > secondNum[j]) {
+          sortingArray.push(secondNum[j]);
           j++;
-        } else if (leftHalfSorted[i] < rightHalfSorted[j]) {
-          resultArray.push(leftHalfSorted[i]);
+        } else if (firstNum[i] < secondNum[j]) {
+          sortingArray.push(firstNum[i]);
           i++;
-        } else if (leftHalfSorted[i] === rightHalfSorted[j]) {
-          resultArray.push(leftHalfSorted[i]);
-          resultArray.push(rightHalfSorted[j]);
+        } else if (firstNum[i] === secondNum[j]) {
+          sortingArray.push(firstNum[i]);
+          sortingArray.push(secondNum[j]);
           i++;
           j++;
         };
         
-        if (i === leftHalfSorted.length) {
-          for (let k = j; k < rightHalfSorted.length; k++) {
-            resultArray.push(rightHalfSorted[k]);
+        if (i === firstNum.length) {
+          for (let k = j; k < secondNum.length; k++) {
+            sortingArray.push(secondNum[k]);
           };
+          resultArray = sortingArray;
           console.log(resultArray);
-          break;
+          return resultArray;
         };
-        if (j === rightHalfSorted.length) {
-          for (let k = i; k < leftHalfSorted.length; k++) {
-            resultArray.push(leftHalfSorted[k]);
+        if (j === secondNum.length) {
+          for (let k = i; k < firstNum.length; k++) {
+            sortingArray.push(firstNum[k]);
           };
+          resultArray = sortingArray;
           console.log(resultArray);
-          break;
+          return resultArray;
         };
-
+        
         nrOfIterations++
         if (nrOfIterations > loopStoper) {
           break;
-        }
+        };
+        console.log(sortingArray);
       };
     };
   };
 };
-mergeSort([10,5,2]); 
+mergeSort([9,8,7,6,5,4,3,2,0]); 
 
-/* if (resultArray[0] === undefined) {
-      resultArray[0] = arrayList[0];
-      console.log(resultArray);
-    };
-    if (resultArray[0] && resultArray[1] === undefined) {
-      const firstNum = resultArray[0];
-      const secondNum = arrayList[0];
-      if (firstNum < secondNum) {
-        resultArray = [firstNum, secondNum];
-      } else {
-        resultArray = [secondNum, firstNum];
-      };
-      console.log(resultArray)
-    };
-
-    if (resultArray[1]) {
-      for (let i = 0; i < resultArray.length; i++) {
-        if (resultArray[i] > arrayList[0]) {
-          resultArray.splice(i, 0, arrayList[0]);
-          //resultArray[i] = arrayList[0];
-          //const restOfresultArrayCopy = resultArrayCopy.slice([i]);
-          //for (let i = 0; i < restOfresultArrayCopy.length; i++) {
-          //  resultArray.push(restOfresultArrayCopy[i]);
-          //};
-          break;
-        };
-        if (resultArray[i] < arrayList[0]) {
-          resultArray[resultArray.length] = resultArrayCopy[i];
-        };
-      };
-    };
-    console.log(resultArray);
-    return arrayList;
-*/
-
-/*
-  if (arrayList.length === 3) {
-    console.log(arrayList);
-    const splitedArray = arrayList.slice(0,2);
-    const rightHalf = arrayList[2];
-    console.log(splitedArray);
-    const sortedSplitedArray = mergeSort(splitedArray);
-    if (arrayList[2] < sortedSplitedArray[0]) {
-      arrayList[0] = arrayList[2];
-      arrayList[1] = sortedSplitedArray[0];
-      arrayList[2] = sortedSplitedArray[1];
-    } else if (arrayList[2] > sortedSplitedArray[0]){
-      arrayList[0] = sortedSplitedArray[0];
-      if (arrayList[2] < sortedSplitedArray[1]) {
-        arrayList[1] = arrayList[2];
-        arrayList[2] = sortedSplitedArray[1];
-      } else (arrayList[2] > sortedSplitedArray[1])
-        arrayList[1] = sortedSplitedArray[1];
-        arrayList[2] = rightHalf;
-    };
-    console.log(arrayList);
-    return arrayList
-  };
-  if (arrayList.length === 4) {
-    const splitedArrayFirst1 = arrayList.slice(0,2);
-    const splitedArraySecond2 = arrayList.slice(2,4);
-    console.log(splitedArrayFirst1);
-    console.log(splitedArraySecond2);
-    const sortedSplitedArrayFirst1 = mergeSort(splitedArrayFirst1);
-    const sortedSplitedArraySecond2 = mergeSort(splitedArraySecond2);
-    if (sortedSplitedArrayFirst1[0] < sortedSplitedArraySecond2[0]) {
-      arrayList[0] = sortedSplitedArrayFirst1[0];
-      if (sortedSplitedArrayFirst1[1] < sortedSplitedArraySecond2[0]) {
-        arrayList[1] = sortedSplitedArrayFirst1[1];
-        arrayList[2] = sortedSplitedArraySecond2[0];
-        arrayList[3] = sortedSplitedArraySecond2[1];
-      };
-      if (sortedSplitedArrayFirst1[1] > sortedSplitedArraySecond2[0]) {
-        arrayList[1] = sortedSplitedArraySecond2[0];
-      };
-      if (sortedSplitedArrayFirst1[1] > sortedSplitedArraySecond2[1]) {
-        arrayList[2] = sortedSplitedArraySecond2[1];
-        arrayList[3] = sortedSplitedArrayFirst1[1];
-      };
-      if (sortedSplitedArrayFirst1[1] < sortedSplitedArraySecond2[1]) {
-        arrayList[2] = sortedSplitedArrayFirst1[1];
-        arrayList[3] = sortedSplitedArraySecond2[1];
-      };
-    };
-    if (sortedSplitedArrayFirst1[0] > sortedSplitedArraySecond2[0]) {
-      arrayList[0] = sortedSplitedArraySecond2[0];
-      if (sortedSplitedArrayFirst1[0] > sortedSplitedArraySecond2[1]) {
-        arrayList[1] = sortedSplitedArraySecond2[1];
-        arrayList[2] = sortedSplitedArrayFirst1[0];
-        arrayList[3] = sortedSplitedArrayFirst1[1];
-      };
-      if (sortedSplitedArrayFirst1[0] < sortedSplitedArraySecond2[1]) {
-        arrayList[1] = sortedSplitedArrayFirst1[0];
-        if (sortedSplitedArrayFirst1[1] < sortedSplitedArraySecond2[1]) {
-          arrayList[2] = sortedSplitedArrayFirst1[1];
-          arrayList[3] = sortedSplitedArraySecond2[1];
-        };
-        if (sortedSplitedArrayFirst1[1] > sortedSplitedArraySecond2[1]) {
-          arrayList[2] = sortedSplitedArraySecond2[1];
-          arrayList[3] = sortedSplitedArrayFirst1[1];
-        };
-      };
-    };
-    console.log(arrayList);
-    return arrayList
-  };
-*/
+console.log(mergeSort([]));

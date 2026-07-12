@@ -71,7 +71,7 @@ const mergeSort = function(arrayList) {
   
     let sortingArray = [];
 
-    if (resultArray[0]) {
+    if (resultArray[0] !== undefined) {
       let i = 0;
       let j = 0;
       let nrOfIterations = 0;
@@ -107,122 +107,16 @@ const mergeSort = function(arrayList) {
           console.log(resultArray);
           return resultArray;
         };
-
+        
         nrOfIterations++
         if (nrOfIterations > loopStoper) {
           break;
-        }
+        };
         console.log(sortingArray);
       };
     };
   };
 };
-mergeSort([10,5,2,6,200,11,2123,1,1,200,1,2,3,11,22,42,1]); 
+mergeSort([9,8,7,6,5,4,3,2,0]); 
 
-/* if (resultArray[0] === undefined) {
-      resultArray[0] = arrayList[0];
-      console.log(resultArray);
-    };
-    if (resultArray[0] && resultArray[1] === undefined) {
-      const firstNum = resultArray[0];
-      const secondNum = arrayList[0];
-      if (firstNum < secondNum) {
-        resultArray = [firstNum, secondNum];
-      } else {
-        resultArray = [secondNum, firstNum];
-      };
-      console.log(resultArray)
-    };
-
-    if (resultArray[1]) {
-      for (let i = 0; i < resultArray.length; i++) {
-        if (resultArray[i] > arrayList[0]) {
-          resultArray.splice(i, 0, arrayList[0]);
-          //resultArray[i] = arrayList[0];
-          //const restOfresultArrayCopy = resultArrayCopy.slice([i]);
-          //for (let i = 0; i < restOfresultArrayCopy.length; i++) {
-          //  resultArray.push(restOfresultArrayCopy[i]);
-          //};
-          break;
-        };
-        if (resultArray[i] < arrayList[0]) {
-          resultArray[resultArray.length] = resultArrayCopy[i];
-        };
-      };
-    };
-    console.log(resultArray);
-    return arrayList;
-*/
-
-/*
-  if (arrayList.length === 3) {
-    console.log(arrayList);
-    const splitedArray = arrayList.slice(0,2);
-    const rightHalf = arrayList[2];
-    console.log(splitedArray);
-    const sortedSplitedArray = mergeSort(splitedArray);
-    if (arrayList[2] < sortedSplitedArray[0]) {
-      arrayList[0] = arrayList[2];
-      arrayList[1] = sortedSplitedArray[0];
-      arrayList[2] = sortedSplitedArray[1];
-    } else if (arrayList[2] > sortedSplitedArray[0]){
-      arrayList[0] = sortedSplitedArray[0];
-      if (arrayList[2] < sortedSplitedArray[1]) {
-        arrayList[1] = arrayList[2];
-        arrayList[2] = sortedSplitedArray[1];
-      } else (arrayList[2] > sortedSplitedArray[1])
-        arrayList[1] = sortedSplitedArray[1];
-        arrayList[2] = rightHalf;
-    };
-    console.log(arrayList);
-    return arrayList
-  };
-  if (arrayList.length === 4) {
-    const splitedArrayFirst1 = arrayList.slice(0,2);
-    const splitedArraySecond2 = arrayList.slice(2,4);
-    console.log(splitedArrayFirst1);
-    console.log(splitedArraySecond2);
-    const sortedSplitedArrayFirst1 = mergeSort(splitedArrayFirst1);
-    const sortedSplitedArraySecond2 = mergeSort(splitedArraySecond2);
-    if (sortedSplitedArrayFirst1[0] < sortedSplitedArraySecond2[0]) {
-      arrayList[0] = sortedSplitedArrayFirst1[0];
-      if (sortedSplitedArrayFirst1[1] < sortedSplitedArraySecond2[0]) {
-        arrayList[1] = sortedSplitedArrayFirst1[1];
-        arrayList[2] = sortedSplitedArraySecond2[0];
-        arrayList[3] = sortedSplitedArraySecond2[1];
-      };
-      if (sortedSplitedArrayFirst1[1] > sortedSplitedArraySecond2[0]) {
-        arrayList[1] = sortedSplitedArraySecond2[0];
-      };
-      if (sortedSplitedArrayFirst1[1] > sortedSplitedArraySecond2[1]) {
-        arrayList[2] = sortedSplitedArraySecond2[1];
-        arrayList[3] = sortedSplitedArrayFirst1[1];
-      };
-      if (sortedSplitedArrayFirst1[1] < sortedSplitedArraySecond2[1]) {
-        arrayList[2] = sortedSplitedArrayFirst1[1];
-        arrayList[3] = sortedSplitedArraySecond2[1];
-      };
-    };
-    if (sortedSplitedArrayFirst1[0] > sortedSplitedArraySecond2[0]) {
-      arrayList[0] = sortedSplitedArraySecond2[0];
-      if (sortedSplitedArrayFirst1[0] > sortedSplitedArraySecond2[1]) {
-        arrayList[1] = sortedSplitedArraySecond2[1];
-        arrayList[2] = sortedSplitedArrayFirst1[0];
-        arrayList[3] = sortedSplitedArrayFirst1[1];
-      };
-      if (sortedSplitedArrayFirst1[0] < sortedSplitedArraySecond2[1]) {
-        arrayList[1] = sortedSplitedArrayFirst1[0];
-        if (sortedSplitedArrayFirst1[1] < sortedSplitedArraySecond2[1]) {
-          arrayList[2] = sortedSplitedArrayFirst1[1];
-          arrayList[3] = sortedSplitedArraySecond2[1];
-        };
-        if (sortedSplitedArrayFirst1[1] > sortedSplitedArraySecond2[1]) {
-          arrayList[2] = sortedSplitedArraySecond2[1];
-          arrayList[3] = sortedSplitedArrayFirst1[1];
-        };
-      };
-    };
-    console.log(arrayList);
-    return arrayList
-  };
-*/
+console.log(mergeSort([]));
